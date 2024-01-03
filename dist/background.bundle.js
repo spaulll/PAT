@@ -476,7 +476,7 @@ var __webpack_exports__ = {};
   !*** ./src/background.js ***!
   \***************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_js_sha1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/js-sha1 */ "./node_modules/js-sha1/src/sha1.js");
+/* harmony import */ var _node_modules_js_sha1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/js-sha1 */ "./node_modules/js-sha1/src/sha1.js");
 /* harmony import */ var _node_modules_js_sha1__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_js_sha1__WEBPACK_IMPORTED_MODULE_0__);
 
 
@@ -487,6 +487,10 @@ chrome.runtime.onInstalled.addListener((details) => {
         sendInstallNotification();
     }
 });
+
+const keepAlive = () => setInterval(chrome.runtime.getPlatformInfo, 20e3);
+chrome.runtime.onStartup.addListener(keepAlive);
+keepAlive();
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
