@@ -8,6 +8,10 @@ chrome.runtime.onInstalled.addListener((details) => {
     }
 });
 
+const keepAlive = () => setInterval(chrome.runtime.getPlatformInfo, 20e3);
+chrome.runtime.onStartup.addListener(keepAlive);
+keepAlive();
+
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         if (request.action === "checkPassword") {
